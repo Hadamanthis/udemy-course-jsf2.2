@@ -1,0 +1,6 @@
+package br.com.geovane.validatedemo;
+
+@ManagedBean
+public class StudentThree {
+
+}

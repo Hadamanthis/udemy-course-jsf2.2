@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<h:head>
+		<title>Student FOUR Registration Form</title>
+	</h:head>
+	<h:body>
+	
+		<h:form>
+			
+			First Name: <h:inputText value="#{studentFour.firstName}" />
+			
+			<br></br>
+			
+			Last Name: <h:inputText value="#{studentFour.lastName}" />
+			
+			<br></br>
+			
+			Favorite Programming Languages:
+			<h:selectOneListbox value="#{studentFour.favoriteLanguages}">
+				<f:selectItem itemLabel="Java" itemValue="Java" />
+				<f:selectItem itemLabel="C#" itemValue="C#" />
+				<f:selectItem itemLabel="PHP" itemValue="PHP" />
+				<f:selectItem itemLabel="Ruby" itemValue="Ruby" />
+			</h:selectOneListbox>
+			
+			<br></br>
+			
+			<h:commandButton value="Submit" action="student_three_response" />
+		
+		</h:form>
+	
+	</h:body>
+</html>
