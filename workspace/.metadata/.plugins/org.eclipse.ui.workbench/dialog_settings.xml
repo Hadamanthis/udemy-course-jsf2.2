@@ -5,6 +5,7 @@
 		<item value="0" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
+<<<<<<< HEAD
 		<item value="34" key="dialogHeight"/>
 		<item value="134" key="dialogWidth"/>
 		<list key="textEntries">
@@ -14,6 +15,21 @@
 		<list key="orderedProviders">
 		</list>
 		<list key="textArray">
+=======
+		<item value="94" key="dialogHeight"/>
+		<item value="194" key="dialogWidth"/>
+		<list key="textEntries">
+			<item value="1"/>
+		</list>
+		<list key="orderedElements">
+			<item value="org.eclipse.jdt.ui.edit.text.java.create.getter.setter"/>
+		</list>
+		<list key="orderedProviders">
+			<item value="org.eclipse.ui.commands"/>
+		</list>
+		<list key="textArray">
+			<item value="ggas"/>
+>>>>>>> 06fa053b2439f52ee4310e0748c049a9a7c331d8
 		</list>
 	</section>
 	<section name="NewWizardAction">
