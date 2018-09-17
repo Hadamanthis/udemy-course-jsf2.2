@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <Context>
 
   <Resource name="jdbc/student_tracker" 
   			auth="Container" type="javax.sql.DataSource"
                maxTotal="20" maxIdle="5" maxWait="10000"
-               username="postgres" password="senha123"
+               username="geovane" password="senha123"
                driverClassName="org.postgresql.Driver"
                url="jdbc:postgresql://localhost:5432/student_tracker"/>
 

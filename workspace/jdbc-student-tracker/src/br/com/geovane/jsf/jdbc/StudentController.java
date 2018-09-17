@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 @ManagedBean
 @SessionScoped
@@ -29,7 +30,7 @@ public class StudentController {
 		return students;
 	}
 	
-	public void loadStudents() {
+	public void loadStudents(ComponentSystemEvent event) {
 		
 		logger.info("Loading students");
 		
@@ -45,6 +46,26 @@ public class StudentController {
 			// Add error message for JSF page
 			addErrorMessage(exc);
 		}
+	}
+	
+	public String addStudent(Student theStudent) {
+		
+		logger.info("Adding student: " + theStudent);
+		
+		try {
+			// add student to the database
+			studentDbUtil.addStudent(theStudent);
+		} catch (Exception exc) {
+			// send this to server logs
+			logger.log(Level.SEVERE, "Error adding students", exc);
+			
+			// add error message for JSF page
+			addErrorMessage(exc);
+			
+			return null;
+		}
+		
+		return "student_list?faces-redirect=true";
 	}
 	
 	private void addErrorMessage(Exception exc) {

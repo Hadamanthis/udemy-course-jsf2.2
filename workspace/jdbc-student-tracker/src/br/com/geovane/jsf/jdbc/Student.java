@@ -1,5 +1,8 @@
 package br.com.geovane.jsf.jdbc;
 
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
 public class Student {
 
 	private int id;
