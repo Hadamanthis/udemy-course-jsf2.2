@@ -1,0 +1,15 @@
+/* Execute first */
+CREATE DATABASE student_tracker; 
+
+/* Execute inside student_tracker database */
+CREATE TABLE 'student' (
+	id SERIAL PRIMARY KEY,
+	first_name VARCHAR(45),
+	last_name VARCHAR(45),
+	email VARCHAR(45)
+);
+INSERT INTO student (first_name, last_name, email) VALUES ('Mary', 'Public', 'mary@luv2code.com');
+INSERT INTO student (first_name, last_name, email) VALUES ('John', 'Doe', 'john@luv2code.com');
+INSERT INTO student (first_name, last_name, email) VALUES ('Ajay', 'Rao', 'ajay@luv2code.com');
+INSERT INTO student (first_name, last_name, email) VALUES ('Bill', 'Neely', 'bill@luv2code.com');
+INSERT INTO student (first_name, last_name, email) VALUES ('Maxwell', 'Dixon', 'max@luv2code.com');
