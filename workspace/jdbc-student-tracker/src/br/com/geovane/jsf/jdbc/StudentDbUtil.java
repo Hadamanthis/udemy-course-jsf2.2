@@ -76,6 +76,46 @@ public class StudentDbUtil {
 		}
 	}
 	
+	public Student getStudent(int idStudent) throws Exception {
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			myConn = getConnection();
+			
+			String sql = "select * from student where id=?";
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			myStmt.setInt(1, idStudent);
+			
+			myRs = myStmt.executeQuery();
+			
+			Student student = null;	
+			
+			if (myRs.next()) {
+				int id = myRs.getInt("id");
+				String firstName = myRs.getString("first_name");
+				String lastName = myRs.getString("last_name");
+				String email = myRs.getString("email");
+				
+				student = new Student(id, firstName, lastName, email);
+			} else {
+				throw new Exception("Could not find	student id: " + idStudent);
+			}
+			
+			return student;
+			
+		}
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+		
+		
+	}
+	
 	public void addStudent(Student theStudent) throws Exception {
 		
 		Connection myConn = null;
@@ -92,6 +132,55 @@ public class StudentDbUtil {
 			myStmt.setString(1, theStudent.getFirstName());
 			myStmt.setString(2, theStudent.getLastName());
 			myStmt.setString(3, theStudent.getEmail());
+			
+			myStmt.execute();
+		} finally {
+			close(myConn, myStmt);
+		}
+		
+	}
+	
+	public void updateStudent(Student theStudent) throws Exception {
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		try {
+			myConn = getConnection();
+			
+			String sql = "update student set " 
+						+ "first_name=?, "
+						+ "last_name=?, "
+						+ "email=? "
+						+ "where id=?";
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			// set parameters
+			myStmt.setString(1, theStudent.getFirstName());
+			myStmt.setString(2, theStudent.getLastName());
+			myStmt.setString(3, theStudent.getEmail());
+			myStmt.setInt(4, theStudent.getId());
+			
+			myStmt.execute();
+		} finally {
+			close(myConn, myStmt);
+		}
+	}
+	
+	public void deleteStudent(int studentId) throws Exception {
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		try {
+			myConn = getConnection();
+			
+			String sql = "delete from student where id=?";
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			myStmt.setInt(1, studentId);
 			
 			myStmt.execute();
 		} finally {
