@@ -18,34 +18,39 @@ import javax.faces.event.ComponentSystemEvent;
 public class StudentController {
 	
 	private List<Student> students;
+	private String searchText;
+	
 	private StudentDbUtil studentDbUtil;
 	private Logger logger = Logger.getLogger(getClass().getName());
 	
-	// Initializes students list and the DAO
+	// initializes students list and the DAO
 	public StudentController() throws Exception {
 		students = new ArrayList<>();
 		
 		studentDbUtil = StudentDbUtil.getInstance();
 	}
 	
-	public List<Student> getStudents() {
-		return students;
-	}
-	
 	public void loadStudents(ComponentSystemEvent event) {
 		
 		logger.info("Loading students");
 		
+		logger.info("searchText: " + searchText);
+		
 		students.clear();
 		
 		try {
-			// Get all students from database
-			students = studentDbUtil.getStudents();
+			if (searchText != null && searchText.trim().length() > 0) {
+				// search for students by name
+				students = studentDbUtil.getStudents(searchText);
+			} else {
+				// get all students from database
+				students = studentDbUtil.getStudents();
+			}
 		} catch (Exception exc) {
-			// Send this to servers logs
+			// send this to servers logs
 			logger.log(Level.SEVERE, "Error loading students", exc);
 			
-			// Add error message for JSF page
+			// add error message for JSF page
 			addErrorMessage(exc);
 		}
 	}
@@ -138,6 +143,18 @@ public class StudentController {
 	private void addErrorMessage(Exception exc) {
 		FacesMessage message = new FacesMessage("Error: " + exc.getMessage());
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+	
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public String getSearchText() {
+		return searchText;
+	}
+
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
 	}
 	
 }

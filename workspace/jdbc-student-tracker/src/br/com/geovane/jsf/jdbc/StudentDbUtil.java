@@ -76,6 +76,56 @@ public class StudentDbUtil {
 		}
 	}
 	
+	public List<Student> getStudents(String searchText) throws Exception {
+		List<Student> students = new ArrayList<>();
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		
+		// removing whitespaces and converting to lower case
+		searchText = searchText.trim().toLowerCase();
+		
+		try {
+			myConn = getConnection();
+			
+			String sql = "select * from student "
+					+ "where lower(first_name) like ? or lower(last_name) like ? "
+					+ "order by last_name";
+			
+			myStmt = myConn.prepareStatement(sql);
+			
+			searchText = "%" + searchText + "%";
+			myStmt.setString(1, searchText);
+			myStmt.setString(2, searchText);
+		
+			System.out.println(myStmt);
+			
+			myRs = myStmt.executeQuery();
+			
+			// Process result set
+			while (myRs.next()) {
+				
+				// Retrieve data from result set row
+				int id = myRs.getInt("id");
+				String firstName = myRs.getString("first_name");
+				String lastName = myRs.getString("last_name");
+				String email = myRs.getString("email");
+				
+				// Create new student object
+				Student tempStudent = new Student(id, firstName, lastName, email);
+				
+				// Add it to the list of students
+				students.add(tempStudent);
+			}
+			
+			return students;
+		}
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+	}
+	
 	public Student getStudent(int idStudent) throws Exception {
 		
 		Connection myConn = null;

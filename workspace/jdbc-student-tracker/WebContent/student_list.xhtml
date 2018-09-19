@@ -33,6 +33,17 @@
 				
 				<h:button value="Add Student" styleClass="add-student-button" outcome="student_add_form" />
 				
+				<!-- Search box -->
+				<h:form>
+				
+					<h:outputLabel value="Search Student: " /> 
+					<h:inputText value="#{studentController.searchText}" />
+					
+					<h:commandButton value="Search" styleClass="save" action="student_list?faces-redirect=true" />
+				
+				</h:form>
+				
+				<!-- Datatable -->
 				<h:form>
 					
 					<h:dataTable value="#{studentController.students}" var="tempStudent"
